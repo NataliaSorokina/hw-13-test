@@ -1,10 +1,12 @@
-export const BASE_URL = 'https://pixabay.com/api/';
+export const BASE_URL = 'https://pixabay.com/api';
+export const PERSONAL_KEY = '22624965-297697bc75a5089bebc4e5f11';
+// export const REQUEST = `q=${name}`;
 export const SEARCH_PARAMS = new URLSearchParams({
-    _key: '22624965-297697bc75a5089bebc4e5f11',
-    _q,
+    // _key: '22624965-297697bc75a5089bebc4e5f11',
+    // _q,
     _page: 1,
     _per_page: 40,
-    _totalHits,
+    // _totalHits,
     _image_type: 'photo',
     _orientation: 'horizontal',
     _safesearch: 'true',  
