@@ -1,4 +1,5 @@
 import { BASE_URL, PERSONAL_KEY, SEARCH_PARAMS } from './constants';
+import axios from 'axios';
 
 // function fetchImages(inputQuery) {
 //     const url = `${BASE_URL}/?key=${PERSONAL_KEY}&q=${inputQuery}&${SEARCH_PARAMS}`;
@@ -14,13 +15,22 @@ import { BASE_URL, PERSONAL_KEY, SEARCH_PARAMS } from './constants';
 // }
 
 
- async function fetchImages(inputQuery) {
+//  async function fetchImages(inputQuery) {
+//     const url = `${BASE_URL}/?key=${PERSONAL_KEY}&q=${inputQuery}&${SEARCH_PARAMS}`;
+//     console.log(url);
+//      const response = await fetch(url);
+//      const newImages = await response.json();
+
+//      return newImages;
+// }
+
+async function fetchImages(inputQuery) {
     const url = `${BASE_URL}/?key=${PERSONAL_KEY}&q=${inputQuery}&${SEARCH_PARAMS}`;
     console.log(url);
-     const response = await fetch(url);
-     const newImages = await response.json();
+     const response = await axios.get(url);
+    //  const newImages = await response.json();
 
-     return newImages;
+     return response.data;
 }
 
 export default { fetchImages };

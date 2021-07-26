@@ -14,6 +14,10 @@ const refs = getRefs();
 
 refs.searchForm.addEventListener('submit', searchHandler);
 
+// let page = 1;
+// let per_page = 40;
+// let total = totalHits / per_page;
+
 async function searchHandler(event) {
     event.preventDefault();
 
@@ -36,7 +40,8 @@ async function searchHandler(event) {
     try {
         const data = await API.fetchImages(inputQuery);
         console.log(data);
-        const { hits } = data;
+        const { hits, totalHits } = data;
+
        return renderImgCard(hits);
     } catch (error) {
         console.log(error);
