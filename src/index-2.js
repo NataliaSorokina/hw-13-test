@@ -8,38 +8,38 @@ import imgCardTemplate from './templates/img-card.hbs';
 
 const refs = getRefs();
 
-const newsApiService = new NewsApiService();
+const API = new NewsApiService();
 
 // const limit = per_page;
 
 refs.loadBtn.setAttribute('hidden', true);
 
-refs.searchForm.addEventListener('submit', onSearch);
+refs.searchForm.addEventListener('submit', searchHandler);
 refs.loadBtn.addEventListener('click', fetchImages);
 
-function onSearch(e) {
-  e.preventDefault();
-  clearImages();   
-  newsApiService.searchQuery = refs.input.value;
+function searchHandler(event) {
+  event.preventDefault();
+  clearImgGallery();   
+  API.searchQuery = refs.input.value;
 
-  if (newsApiService.searchQuery.trim() === '') {
+  if (API.searchQuery.trim() === '') {
     return;
   }
-    newsApiService.resetPage();     
+    API.resetPage();     
     fetchImages();
-    // refs.loadBtn.removeAttribute('hidden');
+    refs.loadBtn.removeAttribute('hidden');
 }
 
 function fetchImages() {
 // refs.loadBtn.setAttribute('hidden', true);
     //  refs.loadBtn.removeAttribute('hidden');
-    newsApiService.fetchImages().then(({ hits, totalHits }) => {
-        console.log(newsApiService.page);
-        console.log(newsApiService.per_page);
-        if (hits.length > 0 && newsApiService.page === 1) {
+    API.fetchImages().then(({ hits, totalHits }) => {
+        console.log(API.page);
+        console.log(API.per_page);
+        if (hits.length > 0 && API.page === 1) {
           Notiflix.Notify.info(`Hooray! We found ${totalHits} images.`);
         }
-       if (totalHits < (newsApiService.page*newsApiService.per_page)) {
+       if (totalHits < (API.page*API.per_page)) {
          Notiflix.Notify.info(NOTIFICATION_END);
          refs.loadBtn.setAttribute('hidden', true);
         } 
@@ -82,12 +82,11 @@ function renderImgCard(hits/* , totalHits */) {
         Notiflix.Notify.failure(NOTIFICATION_FAILURE);
     } else {
         refs.imgGallery.insertAdjacentHTML('beforeend', imgCardTemplate(hits));
-        newsApiService.incrementPage();
-    refs.loadBtn.removeAttribute('hidden');
-
+        API.incrementPage();
+        // refs.loadBtn.removeAttribute('hidden');
     }
 }
 
-function clearImages() {
+function clearImgGallery() {
   refs.imgGallery.innerHTML = '';
 }
