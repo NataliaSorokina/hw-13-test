@@ -27,7 +27,7 @@ function onSearch(e) {
   }
     newsApiService.resetPage();     
     fetchImages();
-    refs.loadBtn.removeAttribute('hidden');
+    // refs.loadBtn.removeAttribute('hidden');
 }
 
 function fetchImages() {
@@ -83,6 +83,8 @@ function renderImgCard(hits/* , totalHits */) {
     } else {
         refs.imgGallery.insertAdjacentHTML('beforeend', imgCardTemplate(hits));
         newsApiService.incrementPage();
+    refs.loadBtn.removeAttribute('hidden');
+
     }
 }
 
