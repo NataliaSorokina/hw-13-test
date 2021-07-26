@@ -14,12 +14,15 @@ const refs = getRefs();
 
 refs.searchForm.addEventListener('submit', searchHandler);
 
-// let page = 1;
-// let per_page = 40;
-// let total = totalHits / per_page;
+
+
 
 async function searchHandler(event) {
     event.preventDefault();
+
+ let page = 1;
+let per_page = 40;
+let totalPages = totalHits / per_page;
 
     const form = event.currentTarget;
     console.log(form.elements);
@@ -30,6 +33,10 @@ async function searchHandler(event) {
     if (inputQuery.trim() === '') {
         return;
     }
+
+    if (page > totalPages) {
+    Notiflix.Notify.info(NOTIFICATION_END);
+  }
 
     // API.fetchImages(inputQuery)
     //     .then(renderImgCard)
@@ -42,7 +49,12 @@ async function searchHandler(event) {
         console.log(data);
         const { hits, totalHits } = data;
 
-       return renderImgCard(hits);
+        return renderImgCard(hits);
+        page += 1;
+
+        if (page > 1) {
+            refs.loadBtn.classList.remove('is-hidden');
+        }
     } catch (error) {
         console.log(error);
         errorHandler(error);

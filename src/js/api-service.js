@@ -25,7 +25,11 @@ import axios from 'axios';
 // }
 
 async function fetchImages(inputQuery) {
-    const url = `${BASE_URL}/?key=${PERSONAL_KEY}&q=${inputQuery}&${SEARCH_PARAMS}`;
+    const params = new URLSearchParams({
+    // per_page: per_page,
+    page: page
+  });
+    const url = `${BASE_URL}/?key=${PERSONAL_KEY}&q=${inputQuery}&${SEARCH_PARAMS}&${params}`;
     console.log(url);
      const response = await axios.get(url);
     //  const newImages = await response.json();
