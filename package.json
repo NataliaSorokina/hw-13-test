@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://nataliasorokina.github.io/goit-js-hw-13/",
+  "homepage": "https://nataliasorokina.github.io/hw-13-test/",
   "scripts": {
     "dev": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /hw-13-test/"
