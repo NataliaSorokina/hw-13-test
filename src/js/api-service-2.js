@@ -5,7 +5,7 @@ export default class NewsApiService {
     constructor() {
         this.searchQuery = '';
         this.page = 1;
-        this.per_page = 6;
+        this.per_page = 40;
     }
     
     async fetchImages() {

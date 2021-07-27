@@ -6,6 +6,7 @@ import {NOTIFICATION_FAILURE, NOTIFICATION_END} from './js/constants';
 import NewsApiService from './js/api-service-2';
 import imgCardTemplate from './templates/img-card.hbs';
 
+
 const refs = getRefs();
 
 const API = new NewsApiService();
@@ -18,6 +19,7 @@ refs.loadBtn.setAttribute('hidden', true);
 refs.searchForm.addEventListener('submit', searchHandler);
 refs.loadBtn.addEventListener('click', fetchImages);
 
+
 function searchHandler(event) {
   event.preventDefault();
   clearImgGallery();   
@@ -28,9 +30,7 @@ function searchHandler(event) {
   }
     API.resetPage();     
     fetchImages();
-    //  setTimeout(() => {
-         refs.loadBtn.removeAttribute('hidden')
-    //  }, 3000);
+    // refs.loadBtn.removeAttribute('hidden');
    
 }
 
@@ -96,12 +96,16 @@ function renderImgCard(hits/* , totalHits */) {
     // if (hits.length === 0) {
     //     Notiflix.Notify.failure(NOTIFICATION_FAILURE);
     // } else {
-        refs.imgGallery.insertAdjacentHTML('beforeend', imgCardTemplate(hits));
+  refs.imgGallery.insertAdjacentHTML('beforeend', imgCardTemplate(hits));
+  
         API.incrementPage();
-        // refs.loadBtn.removeAttribute('hidden');
+        refs.loadBtn.removeAttribute('hidden');
     // }
 }
 
 function clearImgGallery() {
   refs.imgGallery.innerHTML = '';
 }
+
+
+

@@ -5,6 +5,7 @@ import { getRefs } from './js/refs';
 import {NOTIFICATION_FAILURE, NOTIFICATION_INFO} from './js/constants';
 import API from './js/api-service';
 import imgCardTemplate from './templates/img-card.hbs';
+
 // import countryListTemplate from './templates/country-list.hbs';
 
 

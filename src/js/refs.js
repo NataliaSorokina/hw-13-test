@@ -5,6 +5,6 @@ export const getRefs = () => {
     btn: document.querySelector('button'),
     imgGallery: document.querySelector('.gallery'),
     card: document.querySelector('.photo-card'),
-    loadBtn: document.querySelector('.load-more'),
+   loadBtn: document.querySelector('.load-more'),
   }  
 };
