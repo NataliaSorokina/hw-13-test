@@ -14,6 +14,7 @@ const API = new NewsApiService();
 
 refs.loadBtn.setAttribute('hidden', true);
 
+
 refs.searchForm.addEventListener('submit', searchHandler);
 refs.loadBtn.addEventListener('click', fetchImages);
 
@@ -27,15 +28,26 @@ function searchHandler(event) {
   }
     API.resetPage();     
     fetchImages();
-    refs.loadBtn.removeAttribute('hidden');
+    //  setTimeout(() => {
+         refs.loadBtn.removeAttribute('hidden')
+    //  }, 3000);
+   
 }
 
-function fetchImages() {
-// refs.loadBtn.setAttribute('hidden', true);
+async function fetchImages() {
+
     //  refs.loadBtn.removeAttribute('hidden');
-    API.fetchImages().then(({ hits, totalHits }) => {
+    try {
+    //    
+       const result = await API.fetchImages();
+       const { hits, totalHits } = result;
         console.log(API.page);
         console.log(API.per_page);
+        if (hits.length === 0) {
+            refs.loadBtn.setAttribute('hidden', true);
+            Notiflix.Notify.failure(NOTIFICATION_FAILURE);
+            return;
+    }
         if (hits.length > 0 && API.page === 1) {
           Notiflix.Notify.info(`Hooray! We found ${totalHits} images.`);
         }
@@ -46,7 +58,10 @@ function fetchImages() {
     
     renderImgCard(hits);
     // refs.loadBtn.removeAttribute('hidden');
-  });
+  }
+    catch (error) {
+       console.log(error);
+   } 
 }
 
 // function loadMore() {
@@ -78,13 +93,13 @@ function renderImgCard(hits/* , totalHits */) {
     // refs.imgGallery.innerHTML = '';
     // const { response: { hits }, response: { totalHits } } = response;
 
-    if (hits.length === 0) {
-        Notiflix.Notify.failure(NOTIFICATION_FAILURE);
-    } else {
+    // if (hits.length === 0) {
+    //     Notiflix.Notify.failure(NOTIFICATION_FAILURE);
+    // } else {
         refs.imgGallery.insertAdjacentHTML('beforeend', imgCardTemplate(hits));
         API.incrementPage();
         // refs.loadBtn.removeAttribute('hidden');
-    }
+    // }
 }
 
 function clearImgGallery() {
